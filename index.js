@@ -3,14 +3,15 @@ var Device = require('./lib/device')
   , stream = require('stream')
   , configHandlers = require('./lib/config-handlers');
 
+
 // Give our driver a stream interface
 util.inherits(myDriver,stream);
 
 // Our greeting to the user.
-var HELLO_WORLD_ANNOUNCEMENT = {
+var DRIVER_INSTALLED = {
   "contents": [
-    { "type": "heading",      "text": "Hello World Driver Loaded" },
-    { "type": "paragraph",    "text": "The hello world driver has been loaded. You should not see this message again." }
+    { "type": "heading",      "text": "Ninja Phone driver loaded!" },
+    { "type": "paragraph",    "text": "If you haven't done so already, please plug in your USB modem" }
   ]
 };
 
@@ -39,7 +40,7 @@ function myDriver(opts,app) {
     // Check if we have sent an announcement before.
     // If not, send one and save the fact that we have.
     if (!opts.hasSentAnnouncement) {
-      self.emit('announcement',HELLO_WORLD_ANNOUNCEMENT);
+      self.emit('announcement',DRIVER_INSTALLED);
       opts.hasSentAnnouncement = true;
       self.save();
     }
@@ -48,34 +49,6 @@ function myDriver(opts,app) {
     self.emit('register', new Device());
   });
 };
-
-/**
- * Called when a user prompts a configuration.
- * If `rpc` is null, the user is asking for a menu of actions
- * This menu should have rpc_methods attached to them
- *
- * @param  {Object}   rpc     RPC Object
- * @param  {String}   rpc.method The method from the last payload
- * @param  {Object}   rpc.params Any input data the user provided
- * @param  {Function} cb      Used to match up requests.
- */
-myDriver.prototype.config = function(rpc,cb) {
-
-  var self = this;
-  // If rpc is null, we should send the user a menu of what he/she
-  // can do.
-  // Otherwise, we will try action the rpc method
-  if (!rpc) {
-    return configHandlers.menu.call(this,cb);
-  }
-  else if (typeof configHandlers[rpc.method] === "function") {
-    return configHandlers[rpc.method].call(this,rpc.params,cb);
-  }
-  else {
-    return cb(true);
-  }
-};
-
 
 // Export it
 module.exports = myDriver;
