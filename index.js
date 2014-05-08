@@ -47,6 +47,7 @@ function myDriver(opts,app) {
 
     // Register a device
     self.emit('register', new Device());
+	device.emit('data', '');
   });
 };
 
