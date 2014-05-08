@@ -1,0 +1,29 @@
+{
+  "name": "ninja-phone",
+  "version": "0.0.1",
+  "description": "Driver for notifying you when your home phone rings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Grayda/ninja-phone"
+  },
+  "keywords": [
+    "node.js",
+    "ninja",
+    "blocks",
+    "home",
+    "pots",
+    "usb",
+    "modem",
+    "serial",
+    "port"
+  ],
+  "author": "David Gray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Grayda/ninja-phone/issues"
+  }
+}
