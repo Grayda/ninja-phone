@@ -1,6 +1,6 @@
 {
   "name": "ninja-phone",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Driver for notifying you when your home phone rings",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,9 @@
     "serial",
     "port"
   ],
+  "dependencies": {
+    "serialport": "~1.4.0"
+  },
   "author": "David Gray",
   "license": "MIT",
   "bugs": {
