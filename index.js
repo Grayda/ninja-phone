@@ -1,7 +1,6 @@
 var Device = require('./lib/device')
   , util = require('util')
-  , stream = require('stream')
-  , configHandlers = require('./lib/config-handlers');
+  , stream = require('stream');
 
 
 // Give our driver a stream interface
@@ -47,9 +46,22 @@ function myDriver(opts,app) {
 
     // Register a device
     self.emit('register', new Device());
-	device.emit('data', '');
-  });
+	self.emit('data', '');
+	device.emit('data', '');	
+  }.bind(this));
 };
 
+myDriver.prototype.config = function(rpc,cb) {
+
+  console.log('RPC CONFIG', rpc);
+
+  var self = this;
+
+  if (!rpc) {
+    return cb(null,{"contents":[
+      { "type": "submit", "name": "Add Command", "rpc_method": "add" }
+    ]});
+  }
+};
 // Export it
 module.exports = myDriver;
