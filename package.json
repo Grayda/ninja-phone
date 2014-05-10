@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/Grayda/ninja-phone/issues"
   },
+ "dependencies": {
+    "serialport": "~1.4.0"
+  },
    "config": {
     "hasSentAnnouncement": false
   }
