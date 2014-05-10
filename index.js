@@ -1,16 +1,17 @@
 var Device = require('./lib/device')
   , util = require('util')
-  , stream = require('stream');
-
-
+  , stream = require('stream')
+  , configHandlers = require('./lib/config-handlers')
+  , commands = require('./commands');
+  
 // Give our driver a stream interface
 util.inherits(myDriver,stream);
 
 // Our greeting to the user.
 var DRIVER_INSTALLED = {
   "contents": [
-    { "type": "heading",      "text": "Ninja Phone driver loaded!" },
-    { "type": "paragraph",    "text": "If you haven't done so already, please plug in your USB modem" }
+    { "type": "heading",      "text": "Ninja Phone Driver Loaded" },
+    { "type": "paragraph",    "text": "The driver has been loaded. If you haven't done so already, please plug in your 56k USB modem now" }
   ]
 };
 
@@ -38,6 +39,7 @@ function myDriver(opts,app) {
 
     // Check if we have sent an announcement before.
     // If not, send one and save the fact that we have.
+
     if (!opts.hasSentAnnouncement) {
       self.emit('announcement',DRIVER_INSTALLED);
       opts.hasSentAnnouncement = true;
@@ -46,22 +48,36 @@ function myDriver(opts,app) {
 
     // Register a device
     self.emit('register', new Device());
-	self.emit('data', '');
-	device.emit('data', '');	
-  }.bind(this));
+  });
 };
 
+/**
+ * Called when a user prompts a configuration.
+ * If `rpc` is null, the user is asking for a menu of actions
+ * This menu should have rpc_methods attached to them
+ *
+ * @param  {Object}   rpc     RPC Object
+ * @param  {String}   rpc.method The method from the last payload
+ * @param  {Object}   rpc.params Any input data the user provided
+ * @param  {Function} cb      Used to match up requests.
+ */
 myDriver.prototype.config = function(rpc,cb) {
 
-  console.log('RPC CONFIG', rpc);
-
   var self = this;
-
+  // If rpc is null, we should send the user a menu of what he/she
+  // can do.
+  // Otherwise, we will try action the rpc method
   if (!rpc) {
-    return cb(null,{"contents":[
-      { "type": "submit", "name": "Add Command", "rpc_method": "add" }
-    ]});
+    return configHandlers.menu.call(this,cb);
+  }
+  else if (typeof configHandlers[rpc.method] === "function") {
+    return configHandlers[rpc.method].call(this,rpc.params,cb);
+  }
+  else {
+    return cb(true);
   }
 };
+
+
 // Export it
 module.exports = myDriver;
