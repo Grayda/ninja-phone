@@ -28,3 +28,4 @@ TODO
 * Implement Caller ID so you can create rules based on who is calling
 * Get rid of the "Hello World" configuration settings and maybe add a Caller ID option?
 * Stop the driver from firing every time the phone rings (and only fire once when a person is calling)
+* Add more comments to the code to help other Ninja driver beginners like me work out what does what.
