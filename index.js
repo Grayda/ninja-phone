@@ -1,8 +1,7 @@
 var Device = require('./lib/device')
   , util = require('util')
   , stream = require('stream')
-  , configHandlers = require('./lib/config-handlers')
-  , commands = require('./commands');
+  , configHandlers = require('./lib/config-handlers');
   
 // Give our driver a stream interface
 util.inherits(myDriver,stream);
@@ -44,10 +43,12 @@ function myDriver(opts,app) {
       self.emit('announcement',DRIVER_INSTALLED);
       opts.hasSentAnnouncement = true;
       self.save();
+
     }
 
     // Register a device
     self.emit('register', new Device());
+
   });
 };
 

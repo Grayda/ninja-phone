@@ -1,6 +1,6 @@
 {
   "name": "ninja-phone",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ninja Driver that notifies you when the phone is ringing!",
   "main": "index.js",
   "scripts": {
