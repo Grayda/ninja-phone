@@ -15,7 +15,7 @@ This will clone the repository, CD into the directory and install. It may take a
 Notes
 =====
 
-This driver was developed on a Raspberry Pi, so BBB / BBW users, your mileage may vary. Please leave feedback and questions on the forum topic. Forks and pull requests welcomed
+This driver was developed on a Raspberry Pi, so BBB / BBW users, your mileage may vary. Please leave feedback and questions on the forum topic (http://forums.ninjablocks.com/index.php?p=/discussion/2796/beta-driver-ninja-phone-do-stuff-when-your-telephone-rings). Forks and pull requests welcomed
 
 Bugs
 ====
