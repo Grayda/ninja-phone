@@ -1,29 +1,30 @@
 ninja-phone
 ===========
 
-A Ninja Blocks driver that notifies you when your home phone is ringing .Requires a USB modem
-
-Status
-======
-
-This driver is non-functioning. The latest version has most of the code in there ready to go, but a few blocking bugs are stopping it from working with the Ninja Blocks.
+A Ninja Blocks driver that notifies you when your home phone is ringing. Requires a USB 56k modem
 
 Installation
 ============
 
-To install, cd into your drivers directory and run:
+To install, SSH into your block, cd into your Ninja Block drivers directory (on Raspbian, this is /opt/ninjablocks/block-client/drivers/) and run:
 
 `git clone https://github.com/Grayda/ninja-phone && cd ninja-phone && npm install`
 
-This will clone the repository, CD into the directory and install. 
+This will clone the repository, CD into the directory and install. It may take a while, as it needs to download and compile the serialport library, so please be patient.
 
 Notes
 =====
 
-This driver is still a work in progress and may or may not work. It was developed on a Raspberry Pi and requires a USB 56k modem plugged in to your Ninja Block, so your mileage may vary
+This driver was developed on a Raspberry Pi, so BBB / BBW users, your mileage may vary. Please leave feedback and questions on the forum topic. Forks and pull requests welcomed
+
+Bugs
+====
+
+When someone rings, the driver will emit data multiple times, meaning if 1 person calls, your rules might run 8-10 times. This is due to the modem receiving a "RING" every time the phone audibly rings. As there is no start / stop sent (e.g. START RING" / "STOP RING"), it's tricky to work out what is 1 person calling and waiting 8-10 rings and what is 8 people calling and waiting 1 ring
 
 TODO
 ====
 
-* Create a test.js
 * Implement Caller ID so you can create rules based on who is calling
+* Get rid of the "Hello World" configuration settings and maybe add a Caller ID option?
+* Stop the driver from firing every time the phone rings (and only fire once when a person is calling)
