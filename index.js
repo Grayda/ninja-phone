@@ -1,10 +1,11 @@
-var Device = require('./lib/device')
+var Device = require('./lib/device') // The file where we actually look for data from our modem and act on it
   , util = require('util')
   , stream = require('stream')
   , configHandlers = require('./lib/config-handlers');
   
 // Give our driver a stream interface
 util.inherits(myDriver,stream);
+
 
 // Our greeting to the user.
 var DRIVER_INSTALLED = {
@@ -53,7 +54,7 @@ function myDriver(opts,app) {
 };
 
 /**
- * Called when a user prompts a configuration.
+ * Called when a user clicks the config button in the Drivers menu on the dashboard
  * If `rpc` is null, the user is asking for a menu of actions
  * This menu should have rpc_methods attached to them
  *

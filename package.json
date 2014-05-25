@@ -22,6 +22,7 @@
     "serialport": "~1.4.0"
   },
    "config": {
-    "hasSentAnnouncement": false
+    "hasSentAnnouncement": false,
+	"caller_id": false
   }
 }

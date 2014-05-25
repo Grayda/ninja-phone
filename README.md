@@ -12,6 +12,8 @@ To install, SSH into your block, cd into your Ninja Block drivers directory (on 
 
 This will clone the repository, CD into the directory and install. It may take a while, as it needs to download and compile the serialport library, so please be patient.
 
+If you're updating 
+
 Notes
 =====
 
@@ -25,7 +27,7 @@ When someone rings, the driver will emit data multiple times, meaning if 1 perso
 TODO
 ====
 
-* Implement Caller ID so you can create rules based on who is calling
+* ~~Implement Caller ID so you can create rules based on who is calling~~
 * Get rid of the "Hello World" configuration settings and maybe add a Caller ID option?
 * Stop the driver from firing every time the phone rings (and only fire once when a person is calling)
-* Add more comments to the code to help other Ninja driver beginners like me work out what does what.
+* ~~Add more comments to the code to help other Ninja driver beginners like me work out what does what.~~
